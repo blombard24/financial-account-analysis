@@ -9,7 +9,9 @@ def cat_mapper(frame, targ_col, cat_col):
                           'Pet Stores':['krisers'],
                           'House Maintenance' : ['cleaning authority'],
                           'Pet Care' : ['lucky dog daycare'],
-
+                          'Taxes' : ['dupage co tax'],
+                          'Utilities':['nicor gas'],
+                          'Kids: Daycare':['kids kampus'],
                           }
 
     # retailer_cats = {'amazon':' Shopping'}
@@ -20,6 +22,9 @@ def cat_mapper(frame, targ_col, cat_col):
         frame[targ_col].str.contains('|'.join(category_retailers['Pet Stores']),regex=True,case=False),
         frame[targ_col].str.contains('|'.join(category_retailers['House Maintenance']),regex=True,case=False),
         frame[targ_col].str.contains('|'.join(category_retailers['Pet Care']),regex=True,case=False),
+        frame[targ_col].str.contains('|'.join(category_retailers['Taxes']),regex=True,case=False),
+        frame[targ_col].str.contains('|'.join(category_retailers['Utilities']),regex=True,case=False),
+        frame[targ_col].str.contains('|'.join(category_retailers['Kids: Daycare']),regex=True,case=False),
     ]
 
     choice = [
@@ -28,10 +33,16 @@ def cat_mapper(frame, targ_col, cat_col):
         'Pet Stores',
         'House Maintenance',
         'Pet Care',
+        'Taxes',
+        'Utilities',
+        'Kids: Daycare',
     ]
 
     default_cond = frame[cat_col]
 
     frame[cat_col] = np.select(cond, choice, default_cond)
+
+    
+
 
     return frame
