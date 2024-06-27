@@ -1,6 +1,35 @@
 import pandas as pd
 import numpy as np
 
+def retail_mapper(frame, targ_col, retail_col_name):
+    '''
+    assign retailer names to a new retailer column (retail_col_name) based on transaction name or description (targ_col)
+    Keyword arguments:
+    frame: DataFrame object
+    targ_col: str - column containing transaction description or name this column will be pattern match to assign retailer names
+    retail_col_name: str - new column which will be assigned the retailer name based on pattern matching in targ_col
+    '''
+
+    retailer_dict = {'Amazon':['amazon','amzn mktp', 'amazon.com'],
+                     'Acorn Tire and Service':['acorn tire'],
+                     'ABT Electronics':['abt electronics'],
+                     'Air Canada':['air canada','air can'],
+                     'Air Transat':['air transat'],
+                     'Allegory':['ellegory'],
+                    }
+        
+    cond = [frame[targ_col].str.contains('|'.join(vals), case=False,regex=True) for vals in retailer_dict.values()]
+
+    choice = list(retailer_dict)
+
+    default_cond = 'Unknown'
+
+    frame[retail_col_name] = np.select(condlist=cond, choicelist=choice, default=default_cond)
+
+    return frame
+
+
+
 def cat_mapper(frame, targ_col, cat_col):
     # retailer_aliases = {'amazon':['amazon','amzn mktp']}
 
