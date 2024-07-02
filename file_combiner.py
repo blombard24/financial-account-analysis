@@ -2,6 +2,9 @@ import pandas as pd
 import numpy as np
 import os
 import glob
+from cleaners import *
+
+print("hello")
 
 def transaction_compiler():
 
@@ -21,7 +24,7 @@ def transaction_compiler():
             temp_df['file_name'] = i.split('.')[0]
             
             df = pd.concat([df, temp_df])
-            # print('hello')
+            print('hello')
         elif ('chase' in i.lower()) & ('credit' in i.lower()):
             temp_df = pd.read_csv(i)
         
