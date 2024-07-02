@@ -4,7 +4,6 @@ import os
 import glob
 from cleaners import *
 
-print("hello")
 
 def transaction_compiler():
 
@@ -24,7 +23,7 @@ def transaction_compiler():
             temp_df['file_name'] = i.split('.')[0]
             
             df = pd.concat([df, temp_df])
-            print('hello')
+
         elif ('chase' in i.lower()) & ('credit' in i.lower()):
             temp_df = pd.read_csv(i)
         
@@ -34,12 +33,14 @@ def transaction_compiler():
             temp_df['file_name'] = i.split('.')[0]
         
             df = pd.concat([df, temp_df])
+       
         elif ('chase' in i.lower()) & ('checking' in i.lower()):
             temp_df = pd.read_csv(i,index_col=False)
             temp_df = chase_checking_cleaner(temp_df)
             temp_df['file_name'] = i.split('.')[0]
 
             df = pd.concat([df, temp_df])
+       
         elif ('fidelity' in i.lower()) & ('credit' in i.lower()):
             temp_df = pd.read_csv(i, index_col=False)
             temp_df = fidelity_credit_cleaner(temp_df)
@@ -52,5 +53,5 @@ def transaction_compiler():
             temp_df['Date'] = pd.to_datetime(temp_df['Date'])
             temp_df = temp_df.drop('Unnamed: 0', axis=1)
             df = pd.concat([df,temp_df])
-
+    df = df.reset_index(drop=True)
     return df
