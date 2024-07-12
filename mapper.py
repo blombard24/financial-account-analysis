@@ -15,7 +15,7 @@ def retail_mapper(frame, targ_col, retail_col_name):
                      'ABT Electronics':['abt electronics'],
                      'Air Canada':['air canada','air can'],
                      'Air Transat':['air transat'],
-                     'Allegory':['ellegory'],
+                     'Allegory':['allegory'],
                     }
         
     cond = [frame[targ_col].str.contains('|'.join(vals), case=False,regex=True) for vals in retailer_dict.values()]
