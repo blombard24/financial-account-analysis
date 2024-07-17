@@ -22,7 +22,7 @@ def retail_mapper(frame, targ_col, retail_col_name):
 
     choice = list(retailer_dict)
 
-    default_cond = 'Unknown'
+    default_cond = pd.NA
 
     frame[retail_col_name] = np.select(condlist=cond, choicelist=choice, default=default_cond)
 
