@@ -1,5 +1,8 @@
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
 
 from mapper import *
 
@@ -34,3 +37,30 @@ def map_test(frame):
     null_count_df['percent_null_count_difference'] = null_count_df['percent_null_count_difference'].fillna(0.00)
 
     return null_count_df
+
+def null_cat_plot(frame):
+    null_cats = frame.loc[frame['Category'].isnull()]
+
+
+    #Remove all numbers from the description column to remove unique identifiers that could segment the descriptions unneccessarily
+    null_cats.loc[:,'Description'] = null_cats['Description'].str.replace('[0-9]','', regex=True)
+    #Remove extra whitepace between Description values and replace with a single whitespace
+    null_cats.loc[:,'Description'] = null_cats['Description'].str.replace(r'\s+', ' ', regex=True)
+    #Remove trailing and leading whitespace
+    null_cats.loc[:,'Description'] = null_cats['Description'].str.strip()
+
+
+    val_counts = null_cats.value_counts('Description')
+
+    #Plot values 
+    plt.figure(figsize=(6,4),dpi=200)
+    sns.barplot(y = val_counts.index[:20], x= val_counts.values[:20],color='steelblue')
+
+    #Formatting the plot
+    plt.ylabel('Description', fontdict={'weight':500})
+    plt.xlabel('Count', fontdict={'weight':500})
+    plt.title('Count of Transactions without a Category',fontdict={'weight':900},loc='center')
+    plt.yticks(fontsize=5)
+    plt.xticks(fontsize=5)
+    
+    return plt.show()
