@@ -35,6 +35,7 @@ def map_test(frame):
     null_count_df = og_null_count.merge(new_null_count, left_index=True, right_index=True)
     null_count_df['percent_null_count_difference'] =round((null_count_df['original_null_count']-null_count_df['cleaned_null_count'])/null_count_df['original_null_count'],2)
     null_count_df['percent_null_count_difference'] = null_count_df['percent_null_count_difference'].fillna(0.00)
+    null_count_df = null_count_df.sort_values('percent_null_count_difference', ascending=False)
 
     return null_count_df
 

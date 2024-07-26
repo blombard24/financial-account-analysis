@@ -16,6 +16,15 @@ def retail_mapper(frame, targ_col, retail_col_name):
                      'Air Canada':['air canada','air can'],
                      'Air Transat':['air transat'],
                      'Allegory':['allegory'],
+                     'Caseys Foods': ['caseys foods'],
+                     'Costco Wholesale':['costco whse'],
+                     'Glo Nail Lounge':['glo nail lounge'],
+                     'Jewel Osco':['jewel osco'],
+                     'Kids Kampus':['kids kampus'],
+                     'Sparrow Coffee':['sparrow coffee'],
+                     'Starbucks Coffee':['starbucks'],
+                     'Uber':['uber trip'],
+                     'Whole Foods Market':['wholefds'],
                     }
         
     cond = [frame[targ_col].str.contains('|'.join(vals), case=False,regex=True) for vals in retailer_dict.values()]
@@ -35,25 +44,46 @@ def cat_mapper(frame, targ_col, cat_col):
 
     #category_retailers dictionary: keys will be the result for the category column while values will be the conditions used for key assignment
 
-    category_retailers = {'Online Shopping':['amazon','amzn mktp', 'target.com'],
-                          'Wholesale Stores': ['costco', 'target'],
-                          'Pet Stores':['krisers'],
-                          'House Maintenance' : ['cleaning authority', 'j&b landscape'],
-                          'Pet Care' : ['lucky dog daycare', 'eola point animal hosp'],
-                          'Taxes' : ['dupage co tax'],
-                          'Utilities':['nicor gas'],
-                          'Kids: Daycare':['kids kampus'],
-                          'Restaurant':['sparrow coffee'],
-                          'Groceries: Alcohol':['binnys beverage'],
-                          'Personal Care':['barber haus', 'michael graham salon'],
-                          'Car Payment':['volvo car fin', 'audi fincl'],
-                          'Income':['glanbia perform','wellmore holding'],
-                          'Car Maintenance':['everwash'],
-                          'Hardware Store':['ace hardware',],
-                          'Bookstore':['andersons bksh'],
-                          'Pharmacy':['walgreens'],
-                          'Credit Card Payments':['applecard gsbank payment']
-                          }
+    # category_retailers = {'Online Shopping':['amazon','amzn mktp', 'target.com'],
+    #                       'Wholesale Stores': ['costco', 'target'],
+    #                       'Pet Stores':['krisers'],
+    #                       'House Maintenance' : ['cleaning authority', 'j&b landscape'],
+    #                       'Pet Care' : ['lucky dog daycare', 'eola point animal hosp'],
+    #                       'Taxes' : ['dupage co tax'],
+    #                       'Utilities':['nicor gas'],
+    #                       'Kids: Daycare':['kids kampus'],
+    #                       'Restaurant':['sparrow coffee'],
+    #                       'Groceries: Alcohol':['binnys beverage'],
+    #                       'Personal Care':['barber haus', 'michael graham salon'],
+    #                       'Car Payment':['volvo car fin', 'audi fincl'],
+    #                       'Income':['glanbia perform','wellmore holding'],
+    #                       'Car Maintenance':['everwash'],
+    #                       'Hardware Store':['ace hardware',],
+    #                       'Bookstore':['andersons bksh'],
+    #                       'Pharmacy':['walgreens'],
+    #                       'Credit Card Payments':['applecard gsbank payment'],
+    #                       'Loan Payment':['amex epayment ach a web',],
+    #                       }
+    
+    category_retailers = {'Bookstore': ['andersons bksh'],
+                          'Car Maintenance': ['everwash'],
+                          'Car Payment': ['volvo car fin', 'audi fincl'],
+                          'Credit Card Payments': ['applecard gsbank payment'],
+                          'Groceries: Alcohol': ['binnys beverage'],
+                          'Hardware Store': ['ace hardware'],
+                          'House Maintenance': ['cleaning authority', 'j&b landscape'],
+                          'Income': ['glanbia perform', 'wellmore holding'],
+                          'Kids: Daycare': ['kids kampus'],
+                          'Loan Payment': ['amex epayment'],
+                          'Online Shopping': ['amazon', 'amzn mktp', 'target.com'],
+                          'Personal Care': ['barber haus', 'michael graham salon'], 
+                          'Pet Care': ['lucky dog daycare', 'eola point animal hosp'], 
+                          'Pet Stores': ['krisers'],
+                          'Pharmacy': ['walgreens'],
+                          'Restaurant': ['sparrow coffee'],
+                          'Taxes': ['dupage co tax'],
+                          'Utilities': ['nicor gas'],
+                          'Wholesale Stores': ['costco', 'target']}
 
     # retailer_cats = {'amazon':' Shopping'}
 
